@@ -54,10 +54,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Order::class)]
     private Collection $orders;
 
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: TchatMessage::class)]
+    private Collection $tchatMessages;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
         $this->orders = new ArrayCollection();
+        $this->tchatMessages = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -256,6 +260,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($order->getUser() === $this) {
                 $order->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, TchatMessage>
+     */
+    public function getTchatMessages(): Collection
+    {
+        return $this->tchatMessages;
+    }
+
+    public function addTchatMessage(TchatMessage $tchatMessage): self
+    {
+        if (!$this->tchatMessages->contains($tchatMessage)) {
+            $this->tchatMessages->add($tchatMessage);
+            $tchatMessage->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTchatMessage(TchatMessage $tchatMessage): self
+    {
+        if ($this->tchatMessages->removeElement($tchatMessage)) {
+            // set the owning side to null (unless already changed)
+            if ($tchatMessage->getUser() === $this) {
+                $tchatMessage->setUser(null);
             }
         }
 
