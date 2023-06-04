@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Product List</h1>
+
+    <ul>
+        {% for product in products %}
+            {% if product.categories.name == 'books' or product.categories.name == 'computers' or product.categories.name == 'hiffis' %}
+                <li>
+                    <h5>{{ product.categories.name }}</h5>
+                    <ul>
+                        <li>
+                            <h3>{{ product.name }}</h3>
+                            <p>Description: {{ product.description }}</p>
+                            <p>Price: {{ product.price }}</p>
+                            <p>Stock: {{ product.stock }}</p>
+                            <!-- Add other product details if needed -->
+                        </li>
+                    </ul>
+                </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+{% endblock %}
