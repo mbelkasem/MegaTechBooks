@@ -42,8 +42,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 50)]
     private ?string $role = null;
 
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
-    private ?Address $address = null;
+   
 
     #[ORM\Column (options: ['default' => 'CURRENT_TIMESTAMP'])]
     private ?\DateTimeImmutable $created_at = null;
@@ -56,6 +55,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: TchatMessage::class)]
     private Collection $tchatMessages;
+
+    #[ORM\Column(length: 255)]
+    private ?string $address = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $zipcode = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $city = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $country = null;
 
     public function __construct()
     {
@@ -182,17 +193,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getAddress(): ?Address
-    {
-        return $this->address;
-    }
-
-    public function setAddress(?Address $address): self
-    {
-        $this->address = $address;
-
-        return $this;
-    }
+  
 
     public function getCreatedAt(): ?\DateTimeImmutable
     {
@@ -292,6 +293,54 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $tchatMessage->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getAddress(): ?string
+    {
+        return $this->address;
+    }
+
+    public function setAddress(string $address): self
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    public function getZipcode(): ?string
+    {
+        return $this->zipcode;
+    }
+
+    public function setZipcode(string $zipcode): self
+    {
+        $this->zipcode = $zipcode;
+
+        return $this;
+    }
+
+    public function getCity(): ?string
+    {
+        return $this->city;
+    }
+
+    public function setCity(string $city): self
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    public function getCountry(): ?string
+    {
+        return $this->country;
+    }
+
+    public function setCountry(string $country): self
+    {
+        $this->country = $country;
 
         return $this;
     }
