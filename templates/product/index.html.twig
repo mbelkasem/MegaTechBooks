@@ -4,20 +4,37 @@
     <h1>Product List</h1>
 
     <ul>
+        {% set categoriesDisplayed = [] %}
         {% for product in products %}
             {% if product.categories.name == 'books' or product.categories.name == 'computers' or product.categories.name == 'hiffis' %}
-                <li>
-                    <h5>{{ product.categories.name }}</h5>
-                    <ul>
-                        <li>
-                            <h3>{{ product.name }}</h3>
-                            <p>Description: {{ product.description }}</p>
-                            <p>Price: {{ product.price }}</p>
-                            <p>Stock: {{ product.stock }}</p>
-                            <!-- Add other product details if needed -->
-                        </li>
-                    </ul>
-                </li>
+                {% if product.categories.name not in categoriesDisplayed %}
+                    {% set categoriesDisplayed = categoriesDisplayed|merge([product.categories.name]) %}
+                    <li>
+                        <h3>{{ product.categories.name }}</h3>
+                        <ul>
+                            <li>
+                                <h3>{{ product.name }}</h3>
+                                <p>Description: {{ product.description }}</p>
+                                <p>Price: {{ product.price }}</p>
+                                <p>Stock: {{ product.stock }}</p>
+                                <p><img src="{{ asset(product.getImageUrl() )}}" alt="Product Image" width="75"></p>
+                               
+                            </li>
+                        </ul>
+                    </li>
+                {% else %}
+                    <li>
+                        <ul>
+                            <li>
+                                <h3>{{ product.name }}</h3>
+                                <p>Description: {{ product.description }}</p>
+                                <p>Price: {{ product.price }}</p>
+                                <p>Stock: {{ product.stock }}</p>
+                                <p><img src="{{ asset(product.getImageUrl() )}}" alt="Product Image" width="75"></p>
+                            </li>
+                        </ul>
+                    </li>
+                {% endif %}
             {% endif %}
         {% endfor %}
     </ul>
