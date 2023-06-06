@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Votre panier{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="text-center mt-5">Votre panier</h1>
+        <a href="{{ path("panier_delete_all") }}"><button class="btn btn-danger btn-sm p-1" style="font-size: 12px">Supprimer le panier</button></a>
+        <div class="table-responsive mt-4">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Produit</th>
+                    <th>Catégorie</th>
+                    <th>Prix</th>
+                    <th>Quantité</th>
+                    <th>Total</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for element in dataPanier %}
+                    <tr>
+                        <td>{{ element.product.name }}</td>
+                        <td>{{ element.product.categories.name }}</td>
+                        <td>{{ element.product.price }}</td>
+                        <td class="text-center">
+                                    <span class="mr-2">
+                                      <a href="{{ path("panier_supp", {id: element.product.id}) }}">
+                                    <i class="fas fa-minus"></i>
+                                      </a>
+                                    </span>
+                            {{ element.quantite }}
+                            <span class="ml-2">
+                                        <a href="{{ path("panier_add", {id: element.product.id}) }}">
+                                    <i class="fas fa-plus"></i>
+                                        </a>
+                                  </span>
+                        </td>
+                        <td>{{ element.quantite * element.product.price }} €</td>
+                        <td><a href="{{ path("panier_delete", {id: element.product.id}) }}" class="btn btn-danger"><i class="bi bi-trash"></i></a>
+                        </td>
+
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="5" class="text-center">Votre panier est vide</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+            <div  class="col-md-6 mx-auto">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Total</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Montant à payer</h6>
+                        <h3 class="card-text">{{ total }} €</h3>
+                        <a href="" class="btn btn-primary btn-block">Payer</a>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+{% endblock %}
