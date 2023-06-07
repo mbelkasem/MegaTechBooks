@@ -39,6 +39,19 @@ class OrderRepository extends ServiceEntityRepository
         }
     }
 
+
+    public function countByRef($ref){
+        //créer le constructeur de requet:
+        $qb =  $this->createQueryBuilder('c');
+        $qb->where('c.reference LIKE :p1 ');
+        $qb->setParameter('p1', $ref . '%');
+        $qb->select('COUNT(c.id)');
+        return $qb->getQuery()->getSingleScalarResult();
+    }
+
+
+
+
 //    /**
 //     * @return Order[] Returns an array of Order objects
 //     */
