@@ -1,15 +1,10 @@
 <?php
-require __DIR__.'/vendor/autoload.php';
-
 // Connexion à la base de données
 $connexion = new PDO('mysql:host=localhost;dbname=blog', 'root', '');
 
 // Récupérer les billets du blog depuis la base de données
 $requete = $connexion->query('SELECT * FROM billets ORDER BY id DESC');
 $billets = $requete->fetchAll(PDO::FETCH_ASSOC);
-
-// Inclure le template index.html
-include 'templates/index.html';
 
 // Traitement du formulaire d'ajout de billet
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -36,4 +31,9 @@ if (isset($_GET['q'])) {
     $requeteRecherche->execute();
     $billets = $requeteRecherche->fetchAll(PDO::FETCH_ASSOC);
 }
+
+// Retourner les données à utiliser dans le contrôleur
+return [
+    'billets' => $billets
+];
 ?>
