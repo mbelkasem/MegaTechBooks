@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Commentaires</title>
+</head>
+<body>
+    <h1><?php echo $billet['titre']; ?></h1>
+    <p><?php echo $billet['texte']; ?></p>
+    
+    <h2>Commentaires :</h2>
+    <?php foreach ($commentaires as $commentaire): ?>
+        <p><?php echo $commentaire['texte']; ?></p>
+        <hr>
+    <?php endforeach; ?>
+
+    <h2>Ajouter un commentaire :</h2>
+    <form method="POST" action="commentaires.php?billet_id=<?php echo $billetId; ?>">
+        <label for="texte">Texte :</label><br>
+        <textarea id="texte" name="texte" rows="4" cols="50" required></textarea><br><br>
+        
+        <input type="submit" value="Ajouter">
+    </form>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Blog</title>
+</head>
+<body>
+    <h1>Blog</h1>
+
+    <h2>Ajouter un billet :</h2>
+    <form method="POST" action="ajouter_billet.php">
+        <label for="titre">Titre :</label>
+        <input type="text" id="titre" name="titre" required><br><br>
+        
+        <label for="texte">Texte :</label><br>
+        <textarea id="texte" name="texte" rows="4" cols="50" required></textarea><br><br>
+        
+        <input type="submit" value="Ajouter">
+    </form>
+
+    <h2>Rechercher des billets :</h2>
+    <form method="GET" action="rechercher_billets.php">
+        <label for="recherche">Recherche :</label>
+        <input type="text" id="recherche" name="q" required>
+        <input type="submit" value="Rechercher">
+    </form>
+
+    <hr>
+
+    <?php foreach ($billets as $billet): ?>
+        <h2><?php echo $billet['titre']; ?></h2>
+        <p><?php echo $billet['texte']; ?></p>
+        <?php
+            $billetId = $billet['id'];
+            $requeteCommentaires = $connexion->prepare('SELECT * FROM commentaires WHERE billet_id = :billet_id');
+            $requeteCommentaires->bindParam(':billet_id', $billetId);
+            $requeteCommentaires->execute();
+            $commentaires = $requeteCommentaires->fetchAll(PDO::FETCH_ASSOC);
+        ?>
+        <?php if ($commentaires): ?>
+            <a href="commentaires.php?billet_id=<?php echo $billet['id']; ?>">Voir les commentaires</a>
+        <?php endif; ?>
+        <hr>
+    <?php endforeach; ?>
+</body>
+</html>

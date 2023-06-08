@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Résultats de recherche</title>
+</head>
+<body>
+    <h1>Résultats de recherche</h1>
+
+    <?php if (empty($billets)): ?>
+        <p>Aucun billet trouvé pour la recherche "<?php echo $recherche; ?>"</p>
+    <?php else: ?>
+        <?php foreach ($billets as $billet): ?>
+            <h2><?php echo $billet['titre']; ?></h2>
+            <p><?php echo $billet['texte']; ?></p>
+            <a href="commentaires.php?billet_id=<?php echo $billet['id']; ?>">Voir les commentaires</a>
+            <hr>
+        <?php endforeach; ?>
+    <?php endif; ?>
+
+    <script>
+        // Code JavaScript ici si nécessaire
+    </script>
+</body>
+</html>
