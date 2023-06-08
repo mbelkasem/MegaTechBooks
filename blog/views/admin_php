@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Page d'administration</title>
+</head>
+<body>
+    <h1>Page d'administration</h1>
+    <form method="POST" action="connexion.php">
+        <input type="text" name="username" placeholder="Nom d'utilisateur" required><br>
+        <input type="password" name="password" placeholder="Mot de passe" required><br>
+        <input type="submit" value="Se connecter">
+    </form>
+    <?php if (isset($messageErreur)) { echo $messageErreur; } ?>
+</body>
+</html>
