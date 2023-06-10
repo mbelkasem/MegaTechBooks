@@ -6,8 +6,10 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Form\EditProfileUserType;
+use App\Form\ChangePasswordType;
 
 class UserController extends AbstractController
 {
@@ -44,4 +46,44 @@ class UserController extends AbstractController
             'form' => $form->createView(),
         ]); 
     }
+
+    #[Route('/user/changepwd', name: 'user_profil_pwd')]
+        public function editUserPassword(Request $request, EntityManagerInterface $em, UserPasswordHasherInterface $userPasswordHasher): Response
+        {
+            $user = $this->getUser();
+            $form = $this->createForm(ChangePasswordType::class);
+            $form->handleRequest($request);
+
+            $pwdFisrt = $form->get('password')['first']->getData();
+            $pwdSecond = $form->get('password')['second']->getData();
+                    
+            if ($request->getMethod() == 'POST') {
+                
+                if ($pwdFisrt === $pwdSecond) {
+                    
+                    $user->setPassword(
+                        $userPasswordHasher->hashPassword(
+                            $user,
+                            $form->get('password')->getData()
+                        )
+                    );
+            
+                    $this->addFlash('success', 'Mot de passe mis à jour');
+                    $em->persist($user);
+                    $em->flush();
+                    
+                    return $this->redirectToRoute('app_user');
+                } else {                    
+                   
+                    $this->addFlash('warning', 'Les deux mots de passe ne sont pas identiques');                    
+                }
+            
+            }
+
+            
+
+            return $this->render('user/pwduser.html.twig', [
+                'form' => $form->createView(),
+            ]);
+        }
 }

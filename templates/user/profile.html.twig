@@ -13,8 +13,8 @@
                         <span class="font-weight-bold">{{ app.user.firstname }} {{ app.user.lastname }}</span>
                         <span class="text-black-50">{{ app.user.email }}</span>
                         <span>
-                            <a href="{{ path ('user_profil_edit') }}" class="btn btn-secondary">Edit</a>
-                            <a href="{{ path ('app_main') }}" class="btn btn-secondary">Modifier Mot de passe</a>
+                            <a href="{{ path ('user_profil_edit') }}" class="btn btn-primary">Edit</a>
+                            <a href="{{ path ('user_profil_pwd') }}" class="btn btn-secondary">Modifier Mot de passe</a>
                         </span>
                         <span> </span>
                     </div>
@@ -44,7 +44,7 @@
         </div>
     {% else %}
         <div class="container mt-5">
-            <p class="text-center">Utilisateur non connecté.</p>
+            <p class="text-center text-danger">Utilisateur non connecté.</p>
         </div>
     {% endif %}
 {% endblock %}
