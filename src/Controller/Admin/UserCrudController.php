@@ -2,35 +2,35 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Category;
-use App\Entity\Product;
+use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
-class ProductCrudController extends AbstractCrudController
+class UserCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
-        return Product::class;
+        return User::class;
     }
 
+    
     public function configureFields(string $pageName): iterable
     {
         return [
             IdField::new('id')->hideOnForm(),
-            AssociationField::new('categories', 'Category'),
-            TextField::new('name'),
-            TextField::new('description'),
-            NumberField::new('price')->setNumDecimals(2),
-            IntegerField::new('stock'),
+            TextField::new('email'),
+            // ->setFormTypeOption('disabled','disabled'),
+            ArrayField::new('roles'),
+            TextField::new('password'),
+            TextField::new('login'),
+            TextField::new('lastname'),
+            TextField::new('firstname'),
+          
             DateTimeField::new('created_at', 'Schedule')
                 ->setFormTypeOptions([
                     'widget' => 'single_text',
@@ -42,12 +42,17 @@ class ProductCrudController extends AbstractCrudController
                 ->setCustomOption('locale', 'fr')
                 ->setRequired(true),
 
-            ImageField::new('image_url')
-                ->setUploadDir('public/images/categories')
-                
-                // ->setUploadedFileNamePattern('images/categories/{% category.getName() %}/[name].[extension]'),
-                // ->setUploadedFileNamePattern('images/categories/{{ product.getCategories().getName() }}/[name].[extension]'),
+
+           TextField::new('address'),
+           IntegerField::new('zipcode'),
+           TextField::new('city'),
+           TextField::new('country'),
+
+
 
         ];
+
+
     }
+    
 }
