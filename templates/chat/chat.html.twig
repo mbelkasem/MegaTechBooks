@@ -8,7 +8,7 @@
     <div id="chat-messages">
         {% for message in messages %}
             <div class="chat-message">
-                <strong>{{message.user.getFirstname}} {{message.user.getLastname}}</strong>: {{ message.message }} {#EN ATTENDANT QUE VOUS METTIEZ UN USERNAME#}
+                <strong>{{message.user.login}} </strong>: {{ message.message }} {#EN ATTENDANT QUE VOUS METTIEZ UN USERNAME#}
             </div>
         {% endfor %}
     </div>

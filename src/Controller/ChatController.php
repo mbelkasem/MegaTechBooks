@@ -9,7 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
+use App\Entity\User;
 
 
 class ChatController extends AbstractController
@@ -17,27 +17,29 @@ class ChatController extends AbstractController
     #[Route("/chat", name:"chat")]
     public function index(TchatMessageRepository $messageRepository): Response
     {
-        //$this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
         $messages = $messageRepository->findBy([], ['id' => 'DESC'], 10);
-
+        $user=$this->getUser();
         return $this->render('/chat/chat.html.twig', [
-            'messages' => $messages,
+            'messages' => $messages, 
+            'user' => $user,
         ]);
     }
 
     #[Route("/chat/send", name:"chat_send", methods:["POST"])]
-    public function send(Request $request, EntityManagerInterface $entityManager): Response
+    public function send(Request $request, EntityManagerInterface $entityManager,TchatMessageRepository $messageRepository): Response
     {
-        //$this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
         $message = new TchatMessage();
         $message->setMessage($request->request->get('message'));
-        $message->setUser($this->getUser());
+        $user=$this->getUser();
+        $message->setUser($user);
 
         $entityManager->persist($message);
         $entityManager->flush();
 
-        return $this->redirectToRoute('chat');
+        return $this->redirectToRoute('chat');           
     }
 }
