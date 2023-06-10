@@ -16,6 +16,7 @@ class UserController extends AbstractController
     #[Route('/user', name: 'app_user')]
     public function index(): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $user = $this->getUser();
 
         if ($user) {
@@ -32,6 +33,7 @@ class UserController extends AbstractController
     #[Route('/user/edit', name: 'user_profil_edit')]
     public function editUserProfil(Request $request, EntityManagerInterface $em): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $user = $this->getUser();
         $form = $this->createForm(EditProfileUserType::class, $user);
 
@@ -50,6 +52,7 @@ class UserController extends AbstractController
     #[Route('/user/changepwd', name: 'user_profil_pwd')]
         public function editUserPassword(Request $request, EntityManagerInterface $em, UserPasswordHasherInterface $userPasswordHasher): Response
         {
+            $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
             $user = $this->getUser();
             $form = $this->createForm(ChangePasswordType::class);
             $form->handleRequest($request);
