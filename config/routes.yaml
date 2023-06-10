@@ -3,3 +3,11 @@ controllers:
         path: ../src/Controller/
         namespace: App\Controller
     type: attribute
+chat:
+    path: /chat
+    controller: App\Controller\ChatController::index
+    methods: GET
+chat_send:
+    path: /chat/send
+    controller: App\Controller\ChatController::send
+    methods: POST

@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\TchatMessageRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: TchatMessageRepository::class)]
 #[ORM\Table(name:"tchat_messages")]
@@ -16,6 +17,10 @@ class TchatMessage
     private ?int $id = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\Length(
+        max : 500,
+        maxMessage : "Your message cannot be longer than {{ limit }} characters"
+    )]
     private ?string $message = null;
 
     #[ORM\ManyToOne(inversedBy: 'tchatMessages')]
