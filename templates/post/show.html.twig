@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Blog{% endblock %}
+
+{% block body %}
+    <h1>Blog</h1>
+
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <tbody>
+                <tr>
+                    <th>Title</th>
+                    <td>{{ post.title }}</td>
+                </tr>
+
+                <tr>
+                    <th>Description</th>
+                    <td>{{ post.description }}</td>
+                </tr>
+
+                <tr>
+                    <td colspan="2"><img src="{{ asset(post.getImageUrl()) }}" alt="Image" width="75"></td>
+                </tr>
+
+                <tr>
+                    <th>Posté le</th>
+                    <td>{{ post.createdAt ? post.createdAt|date('d-m-Y') : '' }}</td>
+                </tr>
+
+                <tr>
+                    <th>List of comments</th>
+                    <td>
+                        <ul>
+                            {% for comment in post.comment %}
+                                <li>{{ comment.user.firstname }}: {{ comment.content }}</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="mb-3">
+        <a href="{{ path('app_comment_new', {'id': post.id}) }}" class="btn btn-primary">Ajouter un commentaire</a>
+    </div>
+
+    <a href="{{ path('app_post_index') }}" class="btn btn-secondary">Back to list</a>
+
+   
+
+   
+{% endblock %}

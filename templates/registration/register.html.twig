@@ -1,0 +1,83 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+
+{% block title %}{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">Formulaire d'Inscription</div>
+                
+                <div class="card-body">
+                    {{ form_start(registrationForm, {'attr': {'class': 'form-horizontal'}}) }}
+
+                    <fieldset>
+                        <legend>Mon identité</legend>
+                            <div class="form-group">
+                                {{ form_label(registrationForm.login, 'Nom d\'utilisateur', {'label_attr': {'class': 'control-label'}}) }}
+                                {{ form_widget(registrationForm.login, {'attr': {'class': 'form-control', 'placeholder': 'Entrer un nom d\'utilisateur'}}) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(registrationForm.lastname, 'Nom', {'label_attr': {'class': 'control-label'}}) }}
+                                {{ form_widget(registrationForm.lastname, {'attr': {'class': 'form-control', 'placeholder': 'Entrer votre nom'}}) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(registrationForm.firstname, 'Prénom', {'label_attr': {'class': 'control-label'}}) }}
+                                {{ form_widget(registrationForm.firstname, {'attr': {'class': 'form-control', 'placeholder': 'Entrer votre prénom'}}) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(registrationForm.email, 'Adresse e-mail', {'label_attr': {'class': 'control-label'}}) }}
+                                {{ form_widget(registrationForm.email, {'attr': {'class': 'form-control', 'placeholder': 'Entrer votre adresse email'}}) }}
+                            </div>
+        
+                            <div class="form-group">
+                                
+                                {{ form_widget(registrationForm.plainPassword, {'attr': {'class': 'form-control', 'placeholder': 'Entrer votre mot de passe de minimum 6 caractères'}}) }}
+                            </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend>Mes coordonnées</legend>
+                                
+                            <div class="form-group">
+                                {{ form_label(registrationForm.address, 'Adresse', {'label_attr': {'class': 'control-label'}}) }}
+                                {{ form_widget(registrationForm.address, {'attr': {'class': 'form-control', 'placeholder': 'Entrer votre adresse'}}) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(registrationForm.zipcode, 'Code postal', {'label_attr': {'class': 'control-label'}}) }}
+                                {{ form_widget(registrationForm.zipcode, {'attr': {'class': 'form-control', 'placeholder': 'Entrer votre code postal'}}) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(registrationForm.city, 'Ville', {'label_attr': {'class': 'control-label'}}) }}
+                                {{ form_widget(registrationForm.city, {'attr': {'class': 'form-control', 'placeholder': 'Entrer votre ville'}}) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(registrationForm.country, 'Pays', {'label_attr': {'class': 'control-label'}}) }}
+                                {{ form_widget(registrationForm.country, {'attr': {'class': 'form-control', 'placeholder': 'Entrer votre pays'}}) }}
+                            </div>
+                    </fieldset>
+
+                    
+                    
+
+                    <div class="form-group form-check my-3">
+                        {{ form_widget(registrationForm.RGPDAgrement, {'attr': {'class': 'form-check-input'}}) }}
+                        {{ form_label(registrationForm.RGPDAgrement, 'Accepter les conditions', {'label_attr': {'class': 'form-check-label'}}) }}
+                    </div>
+                    <div class="form-group text-center">
+                        <button type="submit" class="btn btn-primary">S'inscrire</button>
+                        <a href="{{ path('app_main') }}"  type="button" class="btn btn-secondary">Annuler</a>
+                    </div>
+                   
+                    {{ form_end(registrationForm) }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
