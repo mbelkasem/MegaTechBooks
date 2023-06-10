@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Resultat</h1>
+    <table>
+        {% if searchResult is not empty %}
+            {% for post in searchResult %}
+                <tr>
+                    <td>{{ post.id }}</td>
+                    <td>{{ post.title }}</td>
+                    <td>
+                        <a href="{{ path('app_post_show', {'id': post.id}) }}" class="btn btn-primary">Voir</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td colspan="3">No records found</td>
+            </tr>
+        {% endif %}
+    </table>
+{% endblock %}
