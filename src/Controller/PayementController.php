@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\Order;
 use App\Entity\OrderDetail;
-use App\Repository\OrderDetailRepository;
 use App\Repository\OrderRepository;
 use App\Repository\ProductRepository;
 use App\Repository\UserRepository;
@@ -16,15 +15,18 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class PayementController extends AbstractController
 {
+
     #[Route('/payement', name: 'app_payement')]
     public function index(ProductRepository $productRepository,
                           SessionInterface $session,
                            EntityManagerInterface $entityManager,
                             OrderRepository $orderRepository,
-                            UserRepository $userRepository): Response
+    ): Response
 
     {
 
+
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         // On récupére le panier actuel
         $panier = $session->get("panier", []);
 
@@ -38,14 +40,14 @@ class PayementController extends AbstractController
                 "product" => $product,
                 "quantite" => $quantite
             ];
+
+            $product->setStock($product->getStock() - $quantite);
             $prixTotal = $product->getPrice() * $quantite;
             $order = new Order();
 
-            //donneer test
-            $user = $userRepository->find(1);
-            $order->setUser($user);
 
-            //$order->setUser($this->getUser());
+
+            $order->setUser($this->getUser());
 
             //Créer la reference de la commande
             $ref = date("ymd");

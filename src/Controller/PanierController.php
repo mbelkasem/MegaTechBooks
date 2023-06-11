@@ -44,11 +44,20 @@ class PanierController extends AbstractController
             $id = $product->getId();
 
             if (!isset($panier[$id])) {
-                // Ajouter le nouveau produit au panier
-                $panier[$id] = 1;
+                if($product->getStock()>0){
+                    // Ajouter le nouveau produit au panier
+                    $panier[$id] = 1;
+                }else{
+                    $this->addFlash('danger' , "Le produit n'est pas disponible en stoc");
+                }
             } else {
                 // Incrémenter la quantité du produit existant dans le panier
-                $panier[$id]++;
+                if($product->getStock()>0){
+                    $panier[$id]++;
+                }else{
+                    $this->addFlash('danger' , "Le produit n'est pas disponible en stoc");
+                }
+
             }
             // On sauvegarde dans la session
             $session->set("panier",$panier);
