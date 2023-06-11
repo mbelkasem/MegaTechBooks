@@ -1,22 +1,18 @@
-{% extends 'base.html.twig' %}
-
-{% block body %}
-    <h1>Resultat</h1>
-    <table>
-        {% if searchResult is not empty %}
-            {% for post in searchResult %}
-                <tr>
-                    <td>{{ post.id }}</td>
-                    <td>{{ post.title }}</td>
-                    <td>
-                        <a href="{{ path('app_post_show', {'id': post.id}) }}" class="btn btn-primary">Voir</a>
-                    </td>
-                </tr>
-            {% endfor %}
+{% extends 'base.html.twig' %} 
+{% block body %} 
+    {% include 'includes/header.html.twig' %}
+    <div class="container">
+      <h1 class="mt-5">Resultat</h1>     
+        {% if searchResult is not empty %} 
+          {% for post in searchResult %}
+            <div>
+              <h6>{{ post.title }}  <a href="{{ path('app_post_show', { id: post.id }) }}" class="btn btn-primary">Afficher</a></h6>             
+            </div>
+          {% endfor %}
         {% else %}
-            <tr>
-                <td colspan="3">No records found</td>
-            </tr>
-        {% endif %}
-    </table>
+          <div>
+            <h5>Aucun resultat trouvé pour ces critères de recherche</h5>
+          </div>
+        {% endif %}  
+    </div>
 {% endblock %}

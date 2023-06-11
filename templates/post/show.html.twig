@@ -3,7 +3,10 @@
 {% block title %}Blog{% endblock %}
 
 {% block body %}
-    <h1>Blog</h1>
+    {% include'includes/header.html.twig' %}
+   <div class="container">
+
+    <h1 class="mt-5">Blog</h1>
 
     <div class="table-responsive">
         <table class="table table-bordered">
@@ -49,5 +52,6 @@
 
    
 
+   </div>
    
 {% endblock %}
