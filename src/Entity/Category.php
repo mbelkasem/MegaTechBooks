@@ -22,11 +22,7 @@ class Category
     #[ORM\OneToMany(mappedBy: 'categories', targetEntity: Product::class)]
     private Collection $products;
 
-<<<<<<< HEAD
-    public function __construct()
-    {
-        $this->products = new ArrayCollection();
-=======
+
     #[ORM\OneToMany(mappedBy: 'category', targetEntity: Post::class)]
     private Collection $posts;
 
@@ -34,7 +30,7 @@ class Category
     {
         $this->products = new ArrayCollection();
         $this->posts = new ArrayCollection();
->>>>>>> origin/mbelkasem
+
     }
 
     public function getId(): ?int
@@ -83,8 +79,6 @@ class Category
 
         return $this;
     }
-<<<<<<< HEAD
-=======
 
     /**
      * @return Collection<int, Post>
@@ -117,8 +111,9 @@ class Category
     }
 
     public function __toString(){
-
         return $this->name;
     }
->>>>>>> origin/mbelkasem
+
+
+
 }
