@@ -3,33 +3,28 @@
 {% block title %}Category index{% endblock %}
 
 {% block body %}
-    <h1>Category index</h1>
+    <div class="container">
+        <h1 class="my-4">Category index</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for category in categories %}
-            <tr>
-                <td>{{ category.id }}</td>
-                <td>{{ category.name }}</td>
-                <td>
-                    <a href="{{ path('app_category_show', {'id': category.id}) }}">show</a>
-                   
-                </td>
-            </tr>
+        {% if categories is not empty %}
+            <ul class="list-group">
+                {% for category in categories %}
+                    <li class="list-group-item">
+                        {% if category.name == 'books' %}
+                            Livres
+                        {% elseif category.name == 'computers' %}
+                            Informatique
+                        {% elseif category.name == 'hiffis' %}
+                            Hiffi
+                        {% else %}
+                            {{ category.name }}
+                        {% endif %}
+                        <a href="{{ path('app_category_show', {'id': category.id}) }}" class="btn btn-primary btn-sm float-end">Voir</a>
+                    </li>
+                {% endfor %}
+            </ul>
         {% else %}
-            <tr>
-                <td colspan="3">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    
+            <p>No records found</p>
+        {% endif %}
+    </div>
 {% endblock %}

@@ -3,50 +3,41 @@
 {% block title %}Categories{% endblock %}
 
 {% block body %}
-    <h1>Category</h1>
-
-    <div class="table-responsive">
-        <table class="table table-bordered">
-            <tbody>
-                <tr>
-                    <th>Id</th>
-                    <td>{{ category.id }}</td>
-                </tr>
-                <tr>
-                    <th>Categorie</th>
-                    <td>{{ category.name }}</td>
-                </tr>
-            </tbody>
-        </table>
+<div class="container">
+    <div class="card mt-5">
+        <div class="card-body">
+            {% set categoryLabel = '' %}
+            {% if category.name == 'books' %} 
+                {% set categoryLabel = 'Categorie Livres' %}
+            {% elseif category.name == 'computers' %}
+                {% set categoryLabel = 'Categorie Informatique' %}
+            {% elseif category.name == 'hiffis' %}
+                {% set categoryLabel = 'Categorie Hiffi' %}
+            {% endif %}
+            <div class="alert alert-info" role="alert">
+                <h5 class="card-text">{{ categoryLabel }}</h5>
+            </div>
+        </div>
     </div>
 
-    <div class="table-responsive">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Title</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for article in articles %}
-                    <tr>
-                        <td>{{ article.id }}</td>
-                        <td>{{ article.title }}</td>
-                        
-                        <td>
-                            <a href="{{ path('app_post_show', {'id': article.id}) }}" class="btn btn-primary">Voir</a>
-                        </td>
-                    </tr>
-                {% else %}
-                    <tr>
-                        <td colspan="4">No records found</td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
+    <h3 class="mt-5">Articles</h3>
 
-    <a href="{{ path('app_category_index') }}" class="btn btn-secondary">Retour à liste</a>
+    {% if articles is not empty %}
+        <div class="list-group">
+            {% for article in articles %}
+                <a href="{{ path('app_post_show', {'id': article.id}) }}" class="list-group-item">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">{{ article.title }}</h5>
+                    </div>
+                </a>
+            {% else %}
+                <p>No records found</p>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No records found</p>
+    {% endif %}
+
+    <a href="{{ path('app_category_index') }}" class="btn btn-secondary mt-3">Retour à la liste</a>
+</div>
 {% endblock %}
