@@ -16,7 +16,7 @@ class PostController extends AbstractController
     #[Route('/', name: 'app_post_index', methods: ['GET'])]
     public function index(PostRepository $postRepository): Response
     {
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        //$this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         
         return $this->render('post/index.html.twig', [
             'posts' => $postRepository->findAll(),
@@ -48,7 +48,7 @@ class PostController extends AbstractController
     #[Route('/{id}', name: 'app_post_show', methods: ['GET'])]
     public function show(Post $post): Response
     {
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        //$this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
         return $this->render('post/show.html.twig', [
             'post' => $post,

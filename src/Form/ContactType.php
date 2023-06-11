@@ -24,7 +24,9 @@ class ContactType extends AbstractType
             ->add('content', TextareaType::class, [
                 'label' => 'Message'
             ])
-            ->add('confirm', SubmitType::class)
+            ->add('confirm', SubmitType::class, [
+                'label' => 'Envoyer'
+            ])
         ;
     }
 

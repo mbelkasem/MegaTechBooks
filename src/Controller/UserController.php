@@ -56,31 +56,31 @@ class UserController extends AbstractController
             $user = $this->getUser();
             $form = $this->createForm(ChangePasswordType::class);
             $form->handleRequest($request);
-
-            $pwdFisrt = $form->get('password')['first']->getData();
-            $pwdSecond = $form->get('password')['second']->getData();
-                    
+        
             if ($request->getMethod() == 'POST') {
-                
-                if ($pwdFisrt === $pwdSecond) {
-                    
+                $pwdFirst = $form->get('password')['first']->getData();
+                $pwdSecond = $form->get('password')['second']->getData();
+        
+                if (strlen($pwdFirst) >= 6 && $pwdFirst === $pwdSecond) {
                     $user->setPassword(
                         $userPasswordHasher->hashPassword(
                             $user,
                             $form->get('password')->getData()
                         )
                     );
-            
+        
                     $this->addFlash('success', 'Mot de passe mis à jour');
                     $em->persist($user);
                     $em->flush();
-                    
+        
                     return $this->redirectToRoute('app_user');
-                } else {                    
-                   
-                    $this->addFlash('warning', 'Les deux mots de passe ne sont pas identiques');                    
+                } else {
+                    if (strlen($pwdFirst) < 6) {
+                        $this->addFlash('warning', 'Le mot de passe doit comporter au moins 6 caractères');
+                    } else {
+                        $this->addFlash('warning', 'Les deux mots de passe ne sont pas identiques');
+                    }
                 }
-            
             }
 
             
