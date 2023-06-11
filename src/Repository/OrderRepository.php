@@ -39,6 +39,7 @@ class OrderRepository extends ServiceEntityRepository
         }
     }
 
+<<<<<<< HEAD
 
     public function countByRef($ref){
         //créer le constructeur de requet:
@@ -52,6 +53,8 @@ class OrderRepository extends ServiceEntityRepository
 
 
 
+=======
+>>>>>>> origin/mbelkasem
 //    /**
 //     * @return Order[] Returns an array of Order objects
 //     */

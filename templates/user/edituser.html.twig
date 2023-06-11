@@ -1,0 +1,86 @@
+{% extends 'base.html.twig' %} 
+
+{% block title %}Modification utilisateur{% endblock %} 
+
+{% block body %} 
+    {% include 'includes/header.html.twig' %}
+        {% if app.user %}    
+        <div class="container rounded bg-white mt-5 mb-5">
+            <div class="row">
+                <div class="col-md-3 border-right">
+                    <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+                        <img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
+                        <span class="font-weight-bold">{{ app.user.firstname }} {{ app.user.lastname }}</span>
+                        
+                        <span> </span>
+                    </div>
+                </div>
+
+                <div class="col-md-5 border-right">
+                    <div class="p-3 py-5">
+                        <h6 style="text-align:center;">Modification de Profile utilisateur</h6>
+                        <div class="col-md-12"> 
+                            {{ form_start(form) }}
+                            <div class="mb-3">
+                                {{ form_label(form.login, 'Login') }}
+                                {{ form_widget(form.login, { 'attr': {'class': 'form-control'} }) }}
+                                {{ form_errors(form.login) }}
+                            </div>
+                            <div class="mb-3">
+                                {{ form_label(form.lastname, 'Nom') }}
+                                {{ form_widget(form.lastname, { 'attr': {'class': 'form-control'} }) }}
+                                {{ form_errors(form.lastname) }}
+                            </div>
+                            <div class="mb-3">
+                                {{ form_label(form.firstname, 'Prénom') }}
+                                {{ form_widget(form.firstname, { 'attr': {'class': 'form-control'} }) }}
+                                {{ form_errors(form.firstname) }}
+                            </div>
+                            <div class="mb-3">
+                                {{ form_label(form.email, 'Email') }}
+                                {{ form_widget(form.email, { 'attr': {'class': 'form-control'} }) }}
+                                {{ form_errors(form.email) }}
+                            </div>
+                            <div class="mb-3">
+                                {{ form_label(form.address, 'Adresse') }}
+                                {{ form_widget(form.address, { 'attr': {'class': 'form-control'} }) }}
+                                {{ form_errors(form.address) }}                                
+                            </div>  
+
+                            <div class="mb-3">
+                                {{ form_label(form.zipcode, 'Code Postale') }}
+                                {{ form_widget(form.zipcode, { 'attr': {'class': 'form-control'} }) }}
+                                {{ form_errors(form.zipcode) }}                                
+                            </div>  
+
+                            <div class="mb-3">
+                                {{ form_label(form.city, 'Ville') }}
+                                {{ form_widget(form.city, { 'attr': {'class': 'form-control'} }) }}
+                                {{ form_errors(form.city) }}                                
+                            </div>  
+
+                            <div class="mb-3">
+                                {{ form_label(form.country, 'Pays') }}
+                                {{ form_widget(form.country, { 'attr': {'class': 'form-control'} }) }}
+                                {{ form_errors(form.country) }}                                
+                            </div>  
+
+                            <div class="col d-flex flex-column justify-content-end mb-3">
+                                {{ form_row(form.Valider, { 'attr': {'class': 'btn btn-primary mb-3  w-100'} }) }}
+                            </div>
+                            <div class="col d-flex flex-column justify-content-end ">
+                                <a href="{{ path('app_user') }}" class="btn btn-secondary">Retour</a>
+                            </div>
+                            {{ form_end(form) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <div class="container mt-5">
+            <p class="text-center text-danger">Utilisateur non connecté</p>
+        </div>
+        
+    {% endif %}  
+{% endblock %}

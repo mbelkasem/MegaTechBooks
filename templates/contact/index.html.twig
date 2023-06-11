@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %} {% block title %}Contact!{% endblock %} {% block
+body %}
+<div class="text-center">
+  <h1>Formulaire de contact</h1>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      {{ form_start(form) }}
+      <div class="form-group">
+        {{ form_label(form.email, "Adresse Email") }}
+        {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+      </div>
+      <div class="form-group">
+        {{ form_label(form.subject, "Sujet") }}
+        {{ form_widget(form.subject, {'attr': {'class': 'form-control'}}) }}
+      </div>
+      <div class="form-group">
+        {{ form_label(form.content, "Message") }}
+        {{ form_widget(form.content, {'attr': {'class': 'form-control', 'rows': 5
+        }}) }}
+      </div>
+      
+      
+      {{ form_end(form) }}
+    </div>
+  </div>
+</div>
+{% endblock %}
