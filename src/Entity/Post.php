@@ -5,7 +5,10 @@ namespace App\Entity;
 use App\Repository\PostRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+<<<<<<< HEAD
+=======
 use Doctrine\DBAL\Types\Types;
+>>>>>>> origin/mbelkasem
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: PostRepository::class)]
@@ -29,6 +32,8 @@ class Post
     #[ORM\Column]
     private ?\DateTimeImmutable $created_at = null;
 
+<<<<<<< HEAD
+=======
     #[ORM\ManyToOne(inversedBy: 'posts')]
     private ?User $user = null;
 
@@ -38,6 +43,7 @@ class Post
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
 
+>>>>>>> origin/mbelkasem
     public function __construct()
     {
         $this->comment = new ArrayCollection();
@@ -113,6 +119,8 @@ class Post
 
         return $this;
     }
+<<<<<<< HEAD
+=======
 
     public function getUser(): ?User
     {
@@ -154,4 +162,5 @@ class Post
 
         return $this;
     }
+>>>>>>> origin/mbelkasem
 }
