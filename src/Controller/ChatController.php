@@ -9,15 +9,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Entity\User;
 
 
+#[Route('/chat')]
 class ChatController extends AbstractController
 {
-    #[Route("/chat", name:"chat")]
+    #[Route("/", name:"chat")]
     public function index(TchatMessageRepository $messageRepository): Response
     {
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+       // $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
         $messages = $messageRepository->findBy([], ['id' => 'DESC'], 10);
         $user=$this->getUser();

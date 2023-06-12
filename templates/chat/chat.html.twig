@@ -3,18 +3,24 @@
 {% block title %}Chat{% endblock %}
 
 {% block body %}
-    <h1>Chat</h1>
+    <h1 class="container">Espace utilisateurs</h1>
 
-    <div id="chat-messages">
-        {% for message in messages %}
-            <div class="chat-message">
-                <strong>{{message.user.login}} </strong>: {{ message.message }} {#EN ATTENDANT QUE VOUS METTIEZ UN USERNAME#}
-            </div>
-        {% endfor %}
+    <div class="container card">
+        <div class="card-body" id="chat-messages">
+            {% for message in messages %}
+                <div class="card mb-2">
+                    <div class="card-body">
+                        <strong>{{ message.user.login }}</strong>: {{ message.message }}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
     </div>
-
-    <form method="post" action="{{ path('chat_send') }}">
-        <input type="text" name="message" required>
-        <button type="submit">Send</button>
+    <h6 class="container mt-5">Nouveau message</h6>
+    <form method="post" action="{{ path('chat_send') }}" class="mt-3">
+        <div class="container input-group">
+            <input type="text" name="message" class="form-control" required>
+            <button type="submit" class="btn btn-primary">Envoyer</button>
+        </div>
     </form>
 {% endblock %}
