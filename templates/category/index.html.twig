@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Category index{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="my-4">Category index</h1>
+
+        {% if categories is not empty %}
+            <ul class="list-group">
+                {% for category in categories %}
+                    <li class="list-group-item">
+                        {% if category.name == 'books' %}
+                            Livres
+                        {% elseif category.name == 'computers' %}
+                            Informatique
+                        {% elseif category.name == 'hiffis' %}
+                            Hiffi
+                        {% else %}
+                            {{ category.name }}
+                        {% endif %}
+                        <a href="{{ path('app_category_show', {'id': category.id}) }}" class="btn btn-primary btn-sm float-end">Voir</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No records found</p>
+        {% endif %}
+    </div>
+{% endblock %}
