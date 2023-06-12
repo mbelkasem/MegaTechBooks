@@ -1,41 +1,81 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Product List</h1>
+    {% include 'includes/header.html.twig' %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('asset/css/datatables.css') }}" />
 
-    <ul>
-        {% set categoriesDisplayed = [] %}
-        {% for product in products %}
-            {% if product.categories.name == 'books' or product.categories.name == 'computers' or product.categories.name == 'hiffis' %}
-                {% if product.categories.name not in categoriesDisplayed %}
-                    {% set categoriesDisplayed = categoriesDisplayed|merge([product.categories.name]) %}
-                    <li>
-                        <h3>{{ product.categories.name }}</h3>
-                        <ul>
-                            <li>
-                                <h3>{{ product.name }}</h3>
-                                <p>Description: {{ product.description }}</p>
-                                <p>Price: {{ product.price }}</p>
-                                <p>Stock: {{ product.stock }}</p>
-                                <p><img src="{{ asset(product.getImageUrl() )}}" alt="Product Image" width="75"></p>
-                               
-                            </li>
-                        </ul>
-                    </li>
-                {% else %}
-                    <li>
-                        <ul>
-                            <li>
-                                <h3>{{ product.name }}</h3>
-                                <p>Description: {{ product.description }}</p>
-                                <p>Price: {{ product.price }}</p>
-                                <p>Stock: {{ product.stock }}</p>
-                                <p><img src="{{ asset(product.getImageUrl() )}}" alt="Product Image" width="75"></p>
-                            </li>
-                        </ul>
-                    </li>
-                {% endif %}
-            {% endif %}
-        {% endfor %}
-    </ul>
+    <script>
+        $(document).ready(function () {
+            $("#table_products").DataTable({
+                dom: 'lrtip',
+                columnDefs: [
+                    { orderable: false, targets: ['no-sort'] }
+                ],
+                language: {
+                    search: "_INPUT_",
+                    searchPlaceholder: "Search..."
+                }
+            });
+        });
+    </script>
+
+    <div class="container">
+        <h1>Liste des Produits</h1>
+
+        <table id="table_products" class="table">
+            <thead>
+                <tr>
+                    <th>Nom du Produit</th>
+                    <th>Categorie</th>
+                    <th>Description</th>
+                    <th>Prix</th>
+                    <th>Stock</th>
+                    <th>Image</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% set categoriesDisplayed = [] %}
+                {% for product in products %}
+                    {% set categoryName = '' %}
+                    {% if product.categories.name == 'books' %}
+                        {% set categoryName = 'Livres' %}
+                    {% elseif product.categories.name == 'computers' %}
+                        {% set categoryName = 'Informatique' %}
+                    {% elseif product.categories.name == 'hiffis' %}
+                        {% set categoryName = 'HiFFI' %}
+                    {% endif %}
+
+                    {% if categoryName != '' %}
+                        {% if categoryName not in categoriesDisplayed %}
+                            {% set categoriesDisplayed = categoriesDisplayed|merge([categoryName]) %}
+                            <tr>
+                                <td colspan="6">
+                                    <h3>{{ categoryName }}</h3>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>{{ product.name }}</td>
+                                <td>{{ categoryName }}</td>
+                                <td>{{ product.description }}</td>
+                                <td>{{ product.price }}</td>
+                                <td>{{ product.stock }}</td>
+                                <td><img src="{{ asset(product.getImageUrl()) }}" alt="Product Image" width="75"></td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td>{{ product.name }}</td>
+                                <td>{{ categoryName }}</td>
+                                <td>{{ product.description }}</td>
+                                <td>{{ product.price }}</td>
+                                <td>{{ product.stock }}</td>
+                                <td><img src="{{ asset(product.getImageUrl()) }}" alt="Product Image" width="75"></td>
+                            </tr>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+   
 {% endblock %}
