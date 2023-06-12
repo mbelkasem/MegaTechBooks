@@ -39,6 +39,7 @@ class PostRepository extends ServiceEntityRepository
         }
     }
 
+
    /**
     * @return Post[] Returns an array of Post objects
     */
@@ -52,6 +53,7 @@ class PostRepository extends ServiceEntityRepository
            ->getResult()
        ;
    }
+
 
 
 //    /**

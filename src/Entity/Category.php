@@ -22,6 +22,7 @@ class Category
     #[ORM\OneToMany(mappedBy: 'categories', targetEntity: Product::class)]
     private Collection $products;
 
+
     #[ORM\OneToMany(mappedBy: 'category', targetEntity: Post::class)]
     private Collection $posts;
 
@@ -29,6 +30,7 @@ class Category
     {
         $this->products = new ArrayCollection();
         $this->posts = new ArrayCollection();
+
     }
 
     public function getId(): ?int
@@ -109,7 +111,9 @@ class Category
     }
 
     public function __toString(){
-
         return $this->name;
     }
+
+
+
 }
