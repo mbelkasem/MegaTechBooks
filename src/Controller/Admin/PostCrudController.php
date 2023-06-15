@@ -61,6 +61,8 @@ class PostCrudController extends AbstractCrudController
         parent::persistEntity($entityManager, $entityInstance);
     }
 
+    
+
     public static function getEntityFqcn(): string
     {
         return Post::class;
