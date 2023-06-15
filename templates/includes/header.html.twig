@@ -1,100 +1,52 @@
-<<<<<<< HEAD
-{% extends 'base.html.twig' %} {% block body %}
-
-<header>
-  <div class="jumbotron" style="padding: 1rem">
-    <div class="d-flex justify-content-between align-items-center">
-      <h1 class="my-0" style="font-size: 1rem">Projet Réservations</h1>
-      <div>
-        {% if app.user %}
-        <a id="signin" class="btn btn-link" style="font-size: 1rem" href="#"
-          >Mon Compte</a
-        >
-        <a
-          id="signin"
-          class="btn btn-link"
-          style="font-size: 1rem"
-          href="{{path ('app_logout')}}"
-          >Me  Deconnecter</a
-        >
-        {% else %}
-        <a
-          id="login"
-          class="btn btn-link mr-3"
-          style="font-size: 1rem"
-          href="{{path ('app_login')}}"
-          >Se connecter</a
-        >
-        <a
-          id="signin"
-          class="btn btn-link"
-          style="font-size: 1rem"
-          href="/inscription"
-          >S'inscrire</a
-        >
-        {% endif %}
-      </div>
-    </div>
-  </div>
-
-  <body>   
-    {% if app.user and app.user.isverified==0%}
-    <div class="alert alert-warning alert-dismissible " role="alert" style="font-size: 1rem" >
-        <div class="d-flex justify-content-between">
-            <div class="alert-message">
-                <strong>Votre compte n'est activé</strong>, <a href="{{path('resend_verif')}}"> renvoyer le lien d'activation</a>
-            </div>
-            <button type="button" class="close" data-bs-dismiss="alert" aria-label="Close">x</button>
-        </div>
-    </div>
-{% endif %}
-
-  </body>
-</header>
-=======
 {% extends 'base.html.twig' %}
 
 {% block body %}
 
-<header>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="{{ path('app_main') }}"><strong>Mega TechBooks</strong></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      {% if app.user %}
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <a class="nav-link text-light" href="{{path ('app_post_index')}}"><i class="bi bi-journal"></i> Blog</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-light" href="{{ path('app_user') }}"><i class="bi bi-person-circle"></i> Mon Profile</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-light" href="{{ path('app_logout') }}"><i class="bi bi-box-arrow-right"></i> Me Déconnecter</a>
-          </li>
-        </ul>
-      {% else %}
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <a class="nav-link text-light" href="{{path ('app_post_index')}}"><i class="bi bi-journal"></i> Blog</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-light" href="{{ path ('app_login') }}"><i class="bi bi-box-arrow-in-right"></i> Se Connecter</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-light" href="{{ path ('app_register') }}"><i class="bi bi-person-plus-fill"></i> S'inscrire</a>
-          </li>
-        </ul>
-      {% endif %}
-      
-     
-    </div>
-  </nav>
- 
-</header>
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="{{ path('app_main') }}"><strong>Mega TechBooks</strong></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        {% if app.user %}
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link text-light" href="{{path ('app_commande')}}"><i class="bi bi-bag-fill"></i> Mes commandes</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-light" href="{{path ('app_post_index')}}"><i class="bi bi-journal"></i> Blog</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-light" href="{{ path('app_user') }}"><i class="bi bi-person-circle"></i> Mon Profile</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-light" href="{{path ('app_panier')}}"><i class="bi bi-cart"></i> Panier</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-light" href="{{ path('app_logout') }}"><i class="bi bi-box-arrow-right"></i> Me Déconnecter</a>
+            </li>
 
->>>>>>> origin/mbelkasem
+          </ul>
+        {% else %}
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link text-light" href="{{path ('app_post_index')}}"><i class="bi bi-journal"></i> Blog</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-light" href="{{ path ('app_login') }}"><i class="bi bi-box-arrow-in-right"></i> Se Connecter</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-light" href="{{ path ('app_register') }}"><i class="bi bi-person-plus-fill"></i> S'inscrire</a>
+            </li>
+          </ul>
+        {% endif %}
+
+
+      </div>
+    </nav>
+
+  </header>
+
 {% endblock %}

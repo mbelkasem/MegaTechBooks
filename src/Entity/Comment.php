@@ -80,11 +80,10 @@ class Comment
 
         return $this;
     }
-<<<<<<< HEAD
-=======
+
 
     public function __toString(){
         return $this->content;
     }
->>>>>>> origin/mbelkasem
+
 }
