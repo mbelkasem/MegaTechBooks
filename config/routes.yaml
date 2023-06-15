@@ -11,3 +11,23 @@ chat_send:
     path: /chat/send
     controller: App\Controller\ChatController::send
     methods: POST
+
+product_index:
+    path: /product
+    controller: App\Controller\ProductController::index
+    methods: GET
+
+product_books:
+    path: /product/books
+    controller: App\Controller\ProductController::books
+    methods: GET
+
+product_computers:
+    path: /product/computers
+    controller: App\Controller\ProductController::computers
+    methods: GET
+
+product_hiffis:
+    path: /product/hiffis
+    controller: App\Controller\ProductController::hiffis
+    methods: GET

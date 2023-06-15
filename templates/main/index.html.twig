@@ -4,91 +4,43 @@
 
 {% block body %}
 {% include 'includes/header.html.twig' %}
-<style>
-    .example-wrapper {
-        margin: 4em auto; 
-        max-width: 800px;
-        width: 95%;
-        font: 18px/1.5 sans-serif;
-    }
-    .example-wrapper code {
-        background: #F5F5F5;
-        padding: 2px 6px;
-    }
-    .carousel-image {
-        max-width: 100%;
-        max-height: 300px;
-        width: auto;
-        height: auto;
-        margin: 0 auto;
-        cursor: pointer;
-    }
-    .carousel-control-prev,
-    .carousel-control-next {
-        font-size: 1.5rem;
-        width: 10%;
-        background-color: #000;
-        opacity: 0.5;
-    }
-    .carousel-control-prev-icon,
-    .carousel-control-next-icon {
-        background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' viewBox='0 0 8 8'%3E%3Cpath d='M6.5 0l-5 3.5 5 3.5v-2h1v-3h-1v-2zm-5 3.5l5 3.5v-2h1v-3h-1v-2l-5 3.5z'/%3E%3C/svg%3E");
-        background-position: 50%;
-        background-repeat: no-repeat;
-        background-size: contain;
-    }
-    .carousel-control-next-icon {
-        background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' viewBox='0 0 8 8'%3E%3Cpath d='M1.5 0l5 3.5-5 3.5v-2h-1v-3h1v-2zm5 3.5l-5 3.5v-2h-1v-3h1v-2l5 3.5z'/%3E%3C/svg%3E");
-    }
-
-   
-    .popover {
-        max-width: 800px; 
-        font-size: 16px;
-    }
-    .popover-header {
-        background-color: #000;
-        color: #fff;
-        font-weight: bold;
-    }
-    .popover-body {
-        padding: 10px;
-    }
-</style>
-
-<div class="example-wrapper">
-    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-            {% set active = true %}
-            {% for product in products %}
-                <div class="carousel-item {% if active %}active{% endif %}">
-                    <img src="{{ asset(product.getImageUrl()) }}" class="d-block w-15 carousel-image" alt="{{ product.name }}"
-                         data-bs-toggle="popover" data-bs-trigger="hover" data-bs-placement="top"
-                         data-bs-content="Description: {{ product.description|nl2br }} Prix: {{ product.price|nl2br}} Stock: {{ product.stock|nl2br }}">
-                </div>
-                {% set active = false %}
-            {% endfor %}
+{% include 'includes/accueil.html.twig' %}
+<footer class="pt-4 my-md-5 pt-md-5 border-top">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-md">
+          <img class="mb-2" src="{{ asset('images/logo/mtblogo2.png')}}" alt="" width="50" height="50">
+          <small class="d-block mb-3 text-body-secondary">&copy; 2023</small>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            
-        </button>
-        <div class="text-center">
-            <button class="btn order-button my-4">Commander</button>
+        <div class="col-6 col-md">
+          <h5>Products</h5>
+          <ul class="list-unstyled text-small">
+            <li class="mb-1"><a class="link-secondary text-decoration-none" href="{{ path('product_books') }}">Books </a></li>
+            <li class="mb-1"><a class="link-secondary text-decoration-none" href="{{ path('product_computers') }}">Computers</a></li>
+            <li class="mb-1"><a class="link-secondary text-decoration-none" href="{{ path('product_hiffis') }}">Hiffis</a></li>
+          </ul>
         </div>
-    </div>
-</div>
+        <div class="col-6 col-md">
+          <h5>Services</h5>
+          <ul class="list-unstyled text-small">
+            <li class="mb-1"><a class="link-secondary text-decoration-none" href="{{ path('app_register') }}">Registration</a></li>
+            <li class="mb-1"><a class="link-secondary text-decoration-none" href="{{ path('app_login') }}">Login</a></li>
+            <li class="mb-1"><a class="link-secondary text-decoration-none" href="{{ path('app_user') }}">mon Profil</a></li>
+            <li class="mb-1"><a class="link-secondary text-decoration-none" href="{{ path('app_panier') }}">Panier</a></li>
+          </ul>
+        </div>
+        <div class="col-6 col-md">
+          <h5>About</h5>
+          <ul class="list-unstyled text-small">
+            <li class="mb-1"><a class="link-secondary text-decoration-none" href="{{ path('app_main') }}">Accueil</a></li>
+            <li class="mb-1"><a class="link-secondary text-decoration-none" href="{{ path('chat') }}">Mini-Chat</a></li>
+            <li class="mb-1"><a class="link-secondary text-decoration-none" href="{{ path('app_post_index') }}">Blog</a></li>
+            <li class="mb-1"><a class="link-secondary text-decoration-none" href="{{ path('app_contact') }}">contact</a></li>
+          </ul>
+        </div>
+      </div>
+  </div>
+</footer>
 
-<script>
-    
-    var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
-    var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
-        return new bootstrap.Popover(popoverTriggerEl);
-    });
-</script>
 
 {% endblock %}
