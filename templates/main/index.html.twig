@@ -4,6 +4,45 @@
 
 {% block body %}
 {% include 'includes/header.html.twig' %}
+
+{% include 'includes/accueil.html.twig' %}
+<footer class="pt-4 my-md-5 pt-md-5 border-top">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-md">
+          <img class="mb-2" src="{{ asset('images/logo/mtblogo2.png')}}" alt="" width="50" height="50">
+          <small class="d-block mb-3 text-body-secondary">&copy; 2023</small>
+        </div>
+        <div class="col-6 col-md">
+          <h5>Products</h5>
+          <ul class="list-unstyled text-small">
+            <li class="mb-1"><a class="link-secondary text-decoration-none" href="{{ path('product_books') }}">Books </a></li>
+            <li class="mb-1"><a class="link-secondary text-decoration-none" href="{{ path('product_computers') }}">Computers</a></li>
+            <li class="mb-1"><a class="link-secondary text-decoration-none" href="{{ path('product_hiffis') }}">Hiffis</a></li>
+          </ul>
+        </div>
+        <div class="col-6 col-md">
+          <h5>Services</h5>
+          <ul class="list-unstyled text-small">
+            <li class="mb-1"><a class="link-secondary text-decoration-none" href="{{ path('app_register') }}">Registration</a></li>
+            <li class="mb-1"><a class="link-secondary text-decoration-none" href="{{ path('app_login') }}">Login</a></li>
+            <li class="mb-1"><a class="link-secondary text-decoration-none" href="{{ path('app_user') }}">mon Profil</a></li>
+            <li class="mb-1"><a class="link-secondary text-decoration-none" href="{{ path('app_panier') }}">Panier</a></li>
+          </ul>
+        </div>
+        <div class="col-6 col-md">
+          <h5>About</h5>
+          <ul class="list-unstyled text-small">
+            <li class="mb-1"><a class="link-secondary text-decoration-none" href="{{ path('app_main') }}">Accueil</a></li>
+            <li class="mb-1"><a class="link-secondary text-decoration-none" href="{{ path('chat') }}">Mini-Chat</a></li>
+            <li class="mb-1"><a class="link-secondary text-decoration-none" href="{{ path('app_post_index') }}">Blog</a></li>
+            <li class="mb-1"><a class="link-secondary text-decoration-none" href="{{ path('app_contact') }}">contact</a></li>
+          </ul>
+        </div>
+      </div>
+  </div>
+</footer>
+
 <style>
     .example-wrapper {
         margin: 4em auto; 
@@ -85,12 +124,6 @@
     </div>
 </div>
 
-<script>
-    
-    var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
-    var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
-        return new bootstrap.Popover(popoverTriggerEl);
-    });
-</script>
+
 
 {% endblock %}

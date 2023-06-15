@@ -1,6 +1,55 @@
 {% extends 'base.html.twig' %}
-
+   
 {% block body %}
+
+    <div class="container pt-5">
+        <table id="example" class="table table-striped" style="width:100%">
+            <thead>
+                <tr>
+                    <th>id</th>
+                    <th>categories_id</th>
+                    <th>name</th>
+                    <th>description</th>
+                    <th>price</th>
+                    <th>stock</th>
+                    <th>image_url</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                {% set categoriesDisplayed = [] %}
+                {% for product in products %}
+                    {% if product.categories.name == 'books' or product.categories.name == 'computers' or product.categories.name == 'hiffis' %}
+                        {% if product.categories.name not in categoriesDisplayed %}
+                            {% set categoriesDisplayed = categoriesDisplayed|merge([product.categories.name]) %}
+                            <tr>
+                                <td>{{ product.id }}</td>
+                                <td>{{ product.categories.name }}</td>
+                                <td>{{ product.name }}</td>
+                                <td>{{ product.description }}</td>
+                                <td>{{ product.price }}</td>
+                                <td>{{ product.stock }}</td>
+                                <td><img src="{{ asset(product.getImageUrl() )}}" alt="Product Image" width="75"></td>
+                            </tr>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>id</th>
+                    <th>categories_id</th>
+                    <th>name</th>
+                    <th>description</th>
+                    <th>price</th>
+                    <th>stock</th>
+                    <th>image_url</th>
+                </tr>
+            </tfoot>
+        </table>
+
+    </div>
+
     {% include 'includes/header.html.twig' %}
     <link rel="stylesheet" type="text/css" href="{{ asset('asset/css/datatables.css') }}" />
 
@@ -78,4 +127,5 @@
     </div>
 
    
+
 {% endblock %}
