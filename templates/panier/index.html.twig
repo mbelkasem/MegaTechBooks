@@ -3,6 +3,7 @@
 {% block title %}Votre panier{% endblock %}
 
 {% block body %}
+
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <a class="navbar-brand" href="{{ path('app_main') }}"><strong>Mega TechBooks</strong></a>
@@ -42,6 +43,9 @@
     </nav>
    
   </header>
+
+    {% include 'includes/header.html.twig' %}
+
     <div class="container">
         <h1 class="text-center mt-5">Votre panier</h1>
         <a href="{{ path("panier_delete_all") }}"><button class="btn btn-danger btn-sm p-1" style="font-size: 12px">Supprimer le panier</button></a>

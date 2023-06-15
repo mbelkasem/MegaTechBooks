@@ -5,7 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Product;
 use App\Entity\Category;
 use App\Entity\User;
-
+use App\Entity\Post;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -21,8 +21,10 @@ class DashboardController extends AbstractDashboardController
 
     public function index(): Response
     {
+
             
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');      
+
         
          return $this->render('admin/dashboard.html.twig');
     }
@@ -37,6 +39,9 @@ class DashboardController extends AbstractDashboardController
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToCrud('Produits', 'fas fa-list', Product::class);
+
+        yield MenuItem::linkToCrud('Blog', 'fas fa-list', Post::class);
+
         yield MenuItem::linkToCrud('Utilisateurs', 'fas fa-list', User::class);
         // yield MenuItem::linkToCrud('Categories', 'fas fa-list', Category::class);
 

@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
    
 {% block body %}
+
     <div class="container pt-5">
         <table id="example" class="table table-striped" style="width:100%">
             <thead>
@@ -48,4 +49,83 @@
         </table>
 
     </div>
+
+    {% include 'includes/header.html.twig' %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('asset/css/datatables.css') }}" />
+
+    <script>
+        $(document).ready(function () {
+            $("#table_products").DataTable({
+                dom: 'lrtip',
+                columnDefs: [
+                    { orderable: false, targets: ['no-sort'] }
+                ],
+                language: {
+                    search: "_INPUT_",
+                    searchPlaceholder: "Search..."
+                }
+            });
+        });
+    </script>
+
+    <div class="container">
+        <h1>Liste des Produits</h1>
+
+        <table id="table_products" class="table">
+            <thead>
+                <tr>
+                    <th>Nom du Produit</th>
+                    <th>Categorie</th>
+                    <th>Description</th>
+                    <th>Prix</th>
+                    <th>Stock</th>
+                    <th>Image</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% set categoriesDisplayed = [] %}
+                {% for product in products %}
+                    {% set categoryName = '' %}
+                    {% if product.categories.name == 'books' %}
+                        {% set categoryName = 'Livres' %}
+                    {% elseif product.categories.name == 'computers' %}
+                        {% set categoryName = 'Informatique' %}
+                    {% elseif product.categories.name == 'hiffis' %}
+                        {% set categoryName = 'HiFFI' %}
+                    {% endif %}
+
+                    {% if categoryName != '' %}
+                        {% if categoryName not in categoriesDisplayed %}
+                            {% set categoriesDisplayed = categoriesDisplayed|merge([categoryName]) %}
+                            <tr>
+                                <td colspan="6">
+                                    <h3>{{ categoryName }}</h3>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>{{ product.name }}</td>
+                                <td>{{ categoryName }}</td>
+                                <td>{{ product.description }}</td>
+                                <td>{{ product.price }}</td>
+                                <td>{{ product.stock }}</td>
+                                <td><img src="{{ asset(product.getImageUrl()) }}" alt="Product Image" width="75"></td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td>{{ product.name }}</td>
+                                <td>{{ categoryName }}</td>
+                                <td>{{ product.description }}</td>
+                                <td>{{ product.price }}</td>
+                                <td>{{ product.stock }}</td>
+                                <td><img src="{{ asset(product.getImageUrl()) }}" alt="Product Image" width="75"></td>
+                            </tr>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+   
+
 {% endblock %}

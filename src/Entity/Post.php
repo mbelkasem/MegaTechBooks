@@ -71,7 +71,9 @@ class Post
 
     public function setImageUrl(?string $image_url): self
     {
-        $this->image_url = $image_url;
+      
+            $this->image_url = 'images/categories/' . $image_url;   
+
 
         return $this;
     }
@@ -124,7 +126,7 @@ class Post
         return $this->user;
     }
 
-    public function setUser(?User $user): static
+    public function setUser(?User $user): self
     {
         $this->user = $user;
 
@@ -160,4 +162,9 @@ class Post
         return $this;
     }
 
+
 }
+
+
+}
+
