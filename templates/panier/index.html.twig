@@ -3,7 +3,11 @@
 {% block title %}Votre panier{% endblock %}
 
 {% block body %}
+
+
+
     {% include 'includes/header.html.twig' %}
+
     <div class="container">
         <h1 class="text-center mt-5">Votre panier</h1>
         <a href="{{ path("panier_delete_all") }}"><button class="btn btn-danger btn-sm p-1" style="font-size: 12px">Supprimer le panier</button></a>
@@ -65,5 +69,42 @@
 
         </div>
     </div>
+    <footer class="pt-4 my-md-5 pt-md-5 border-top">
+        <div class="container">
+          <div class="row">
+            <div class="col-12 col-md">
+              <img class="mb-2" src="{{ asset('images/logo/mtblogo2.png')}}" alt="" width="50" height="50">
+              <small class="d-block mb-3 text-body-secondary">&copy; 2023</small>
+            </div>
+            <div class="col-6 col-md">
+              <h5>Products</h5>
+              <ul class="list-unstyled text-small">
+                <li class="mb-1"><a class="link-secondary text-decoration-none" href="{{ path('product_books') }}">Books </a></li>
+                <li class="mb-1"><a class="link-secondary text-decoration-none" href="{{ path('product_computers') }}">Computers</a></li>
+                <li class="mb-1"><a class="link-secondary text-decoration-none" href="{{ path('product_hiffis') }}">Hiffis</a></li>
+              </ul>
+            </div>
+            <div class="col-6 col-md">
+              <h5>Services</h5>
+              <ul class="list-unstyled text-small">
+                <li class="mb-1"><a class="link-secondary text-decoration-none" href="{{ path('app_register') }}">Registration</a></li>
+                <li class="mb-1"><a class="link-secondary text-decoration-none" href="{{ path('app_login') }}">Login</a></li>
+                <li class="mb-1"><a class="link-secondary text-decoration-none" href="{{ path('app_user') }}">mon Profil</a></li>
+                <li class="mb-1"><a class="link-secondary text-decoration-none" href="{{ path('app_panier') }}">Panier</a></li>
+              </ul>
+            </div>
+            <div class="col-6 col-md">
+              <h5>About</h5>
+              <ul class="list-unstyled text-small">
+                <li class="mb-1"><a class="link-secondary text-decoration-none" href="{{ path('app_main') }}">Accueil</a></li>
+                <li class="mb-1"><a class="link-secondary text-decoration-none" href="{{ path('chat') }}">Mini-Chat</a></li>
+                <li class="mb-1"><a class="link-secondary text-decoration-none" href="{{ path('app_post_index') }}">Blog</a></li>
+                <li class="mb-1"><a class="link-secondary text-decoration-none" href="{{ path('app_contact') }}">contact</a></li>
+              </ul>
+            </div>
+          </div>
+      </div>
+    </footer>
+    
 
 {% endblock %}
