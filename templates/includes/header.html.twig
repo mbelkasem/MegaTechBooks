@@ -9,6 +9,12 @@
               aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
+
+      {% if app.user and 'ROLE_ADMIN' in  app.user.roles  %}
+      <li class="nav-item">
+        <a class="nav-link text-light" href="/admin"><i class="bi bi-kanban-fill"></i>Dashboard</a>
+    </li>
+    {% endif %}
       <div class="collapse navbar-collapse" id="navbarNav">
         {% if app.user %}
           <ul class="navbar-nav ml-auto">
@@ -28,6 +34,8 @@
               <a class="nav-link text-light" href="{{ path('app_logout') }}"><i class="bi bi-box-arrow-right"></i> Me Déconnecter</a>
             </li>
 
+          
+
           </ul>
         {% else %}
           <ul class="navbar-nav ml-auto">
@@ -46,6 +54,8 @@
 
       </div>
     </nav>
+
+    
 
   </header>
 
