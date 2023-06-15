@@ -34,23 +34,13 @@
                 </ul>
             </div>
             <div class="col-lg-4">
-                <div class="card">
+                <div class="card mt-5">
                     <div class="card-body">
                         <h5 class="card-title">Categories</h5>
                         <ul class="list-group">
-                            {% for post in posts %}
-                                <li class="list-group-item">
-                                    {% if post.category.name == 'books' %}
-                                        <a href="{{ path('app_category_show', {'id': post.category.id}) }}">Livres</a>
-                                    {% elseif post.category.name == 'computers' %}
-                                        <a href="{{ path('app_category_show', {'id': post.category.id}) }}">Informatique</a>
-                                    {% elseif post.category.name == 'hiffis' %}
-                                        <a href="{{ path('app_category_show', {'id': post.category.id}) }}">Hiffi</a>
-                                    {% else %}
-                                        <a href="{{ path('app_category_show', {'id': post.category.id}) }}">{{ post.category.name }}</a>
-                                    {% endif %}
-                                </li>
-                            {% endfor %}
+                            <a href="{{ path('app_category_show', {'id': posts[0].category.id}) }}">Livres</a>
+                            <a href="{{ path('app_category_show', {'id': posts[1].category.id}) }}">Hiffi</a>
+                            <a href="{{ path('app_category_show', {'id': posts[2].category.id}) }}">Informatique</a>                            
                         </ul>
                     </div>
                 </div>

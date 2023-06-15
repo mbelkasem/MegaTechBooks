@@ -65,6 +65,10 @@
                     <img src="{{ asset(product.getImageUrl()) }}" class="d-block w-15 carousel-image" alt="{{ product.name }}"
                          data-bs-toggle="popover" data-bs-trigger="hover" data-bs-placement="top"
                          data-bs-content="Description: {{ product.description|nl2br }} Prix: {{ product.price|nl2br}} Stock: {{ product.stock|nl2br }}">
+                         <div class="text-center">
+                            <button class="btn order-button my-4" > <a href="{{ path('panier_add', {'id': product.id}) }}">Ajouter au pannier</a></button>           
+                        </div>
+                         
                 </div>
                 {% set active = false %}
             {% endfor %}
@@ -77,9 +81,7 @@
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             
         </button>
-        <div class="text-center">
-            <button class="btn order-button my-4">Commander</button>
-        </div>
+       
     </div>
 </div>
 
