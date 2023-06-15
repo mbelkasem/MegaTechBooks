@@ -3,6 +3,7 @@
 {% block title %}Votre panier{% endblock %}
 
 {% block body %}
+    {% include 'includes/header.html.twig' %}
     <div class="container">
         <h1 class="text-center mt-5">Votre panier</h1>
         <a href="{{ path("panier_delete_all") }}"><button class="btn btn-danger btn-sm p-1" style="font-size: 12px">Supprimer le panier</button></a>

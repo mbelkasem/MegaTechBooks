@@ -46,9 +46,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 50)]
     private ?string $firstname = null;
 
-   
 
-   
+
+
 
     #[ORM\Column (options: ['default' => 'CURRENT_TIMESTAMP'])]
     private ?\DateTimeImmutable $created_at = null;
@@ -196,7 +196,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
-  
+
 
     public function getCreatedAt(): ?\DateTimeImmutable
     {
@@ -385,4 +385,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     }
 
+
 }
+
+}
+
