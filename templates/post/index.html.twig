@@ -2,7 +2,7 @@
 
 {% block body %}
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <span class="navbar-brand"><strong>Mega TechBooks</strong></span>
+    <span class="navbar-brand" href="{{ path('app_main') }}"><strong>Mega TechBooks</strong></span>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -20,7 +20,8 @@
         </form>
     </div>
 </nav>
-    <div class="container mt-5">
+    <section>
+      <div class="container mt-5">
         <div class="row">
             <div class="col-lg-8">
                 <h1>Articles</h1>
@@ -34,27 +35,26 @@
                 </ul>
             </div>
             <div class="col-lg-4">
-                <div class="card">
+                <div class="card mt-5">
                     <div class="card-body">
                         <h5 class="card-title">Categories</h5>
                         <ul class="list-group">
-                            {% for post in posts %}
-                                <li class="list-group-item">
-                                    {% if post.category.name == 'books' %}
-                                        <a href="{{ path('app_category_show', {'id': post.category.id}) }}">Livres</a>
-                                    {% elseif post.category.name == 'computers' %}
-                                        <a href="{{ path('app_category_show', {'id': post.category.id}) }}">Informatique</a>
-                                    {% elseif post.category.name == 'hiffis' %}
-                                        <a href="{{ path('app_category_show', {'id': post.category.id}) }}">Hiffi</a>
-                                    {% else %}
-                                        <a href="{{ path('app_category_show', {'id': post.category.id}) }}">{{ post.category.name }}</a>
-                                    {% endif %}
-                                </li>
-                            {% endfor %}
+                            <a href="{{ path('app_category_show', {'id': posts[0].category.id}) }}">Livres</a>
+                            <a href="{{ path('app_category_show', {'id': posts[1].category.id}) }}">Hiffi</a>
+                            <a href="{{ path('app_category_show', {'id': posts[2].category.id}) }}">Informatique</a>                            
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+  
+    </section>
+ 
+ 
+     
+    <section style="margin-top: 500px;">
+      {% include 'includes/footer.html.twig' %}
+  </section>
+  
 {% endblock %}

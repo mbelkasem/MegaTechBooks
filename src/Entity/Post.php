@@ -5,10 +5,9 @@ namespace App\Entity;
 use App\Repository\PostRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-<<<<<<< HEAD
-=======
+
 use Doctrine\DBAL\Types\Types;
->>>>>>> origin/mbelkasem
+
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: PostRepository::class)]
@@ -32,8 +31,7 @@ class Post
     #[ORM\Column]
     private ?\DateTimeImmutable $created_at = null;
 
-<<<<<<< HEAD
-=======
+
     #[ORM\ManyToOne(inversedBy: 'posts')]
     private ?User $user = null;
 
@@ -43,7 +41,7 @@ class Post
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
 
->>>>>>> origin/mbelkasem
+
     public function __construct()
     {
         $this->comment = new ArrayCollection();
@@ -73,7 +71,9 @@ class Post
 
     public function setImageUrl(?string $image_url): self
     {
-        $this->image_url = $image_url;
+      
+            $this->image_url = 'images/categories/' . $image_url;   
+
 
         return $this;
     }
@@ -119,15 +119,14 @@ class Post
 
         return $this;
     }
-<<<<<<< HEAD
-=======
+
 
     public function getUser(): ?User
     {
         return $this->user;
     }
 
-    public function setUser(?User $user): static
+    public function setUser(?User $user): self
     {
         $this->user = $user;
 
@@ -162,5 +161,10 @@ class Post
 
         return $this;
     }
->>>>>>> origin/mbelkasem
+
+
 }
+
+
+
+

@@ -39,8 +39,7 @@ class PostRepository extends ServiceEntityRepository
         }
     }
 
-<<<<<<< HEAD
-=======
+
    /**
     * @return Post[] Returns an array of Post objects
     */
@@ -56,7 +55,7 @@ class PostRepository extends ServiceEntityRepository
    }
 
 
->>>>>>> origin/mbelkasem
+
 //    /**
 //     * @return Post[] Returns an array of Post objects
 //     */

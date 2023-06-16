@@ -79,9 +79,11 @@ class PayementController extends AbstractController
 
         $entityManager->flush();
 
-        return $this->render('payement/index.html.twig', [
-            'controller_name' => 'PayementController',
-        ]);
+        $session->remove("panier");
+
+        $this->addFlash('success', 'Nous tenons à vous remercier sincèrement d\'avoir choisi notre service et de nous avoir fait confiance. Nous apprécions votre soutien et espérons que votre expérience d\'achat a été agréable. N\'hésitez pas à nous contacter si vous avez des questions ou des préoccupations. Nous sommes là pour vous aider. Merci encore et à bientôt !');
+
+        return $this->redirectToRoute('app_commande');
     }
 }
 

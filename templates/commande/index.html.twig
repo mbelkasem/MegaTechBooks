@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Vos commandes{% endblock %}
+
+{% block body %}
+    {% include 'includes/header.html.twig' %}
+<div class="container">
+    <h1 class="text-center mt-5">Vos commandes</h1>
+    <div class="table-responsive mt-4">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Référence de commande</th>
+            <th>Nom du produit</th>
+            <th>Quantité</th>
+            <th>Prix unitaire</th>
+            <th>Date d'achat</th>
+            <th>Statut de la commande</th>
+            <th>Prix total</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for commande in commandes %}
+            {% set order = commande.orders %}
+            {% set product = commande.products %}
+            <tr>
+                <td>{{ order.reference }}</td>
+                <td>{{ product.name }}</td>
+                <td>{{ commande.quantity }}</td>
+                <td>{{ commande.price }}</td>
+                <td>{{ order.createdAt|date('d/m/Y H:i:s') }}</td>
+                <td>{{ order.payed ? 'Payée' : 'Non payée' }}</td>
+                <td>{{ commande.quantity * commande.price }} €</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+</div>
+{% endblock %}
