@@ -43,14 +43,12 @@
 <div class="container pt-5">
     <table id="example" class="table table-striped" style="width:100%">
         <thead>
-            <tr>
-                <th>id</th>
-                <th>categories_id</th>
-                <th>name</th>
-                <th>description</th>
-                <th>price</th>
-                <th>stock</th>
-                <th>image_url</th>
+            <tr>               
+                <th>Nom</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Stock</th>
+                <th>Image Produit</th>
 
             </tr>
         </thead>
@@ -59,9 +57,7 @@
             {% for product in products %}
                 {% if product.categories.name == 'hiffis' %}
                         {% set categoriesDisplayed = categoriesDisplayed|merge([product.categories.name]) %}
-                        <tr>
-                            <td>{{ product.id }}</td>
-                            <td>{{ product.categories.name }}</td>
+                        <tr>                          
                             <td>{{ product.name }}</td>
                             <td>{{ product.description }}</td>
                             <td>{{ product.price }}</td>
@@ -73,18 +69,7 @@
                         </tr>
                 {% endif %}
             {% endfor %}
-        </tbody>
-        <tfoot>
-            <tr>
-                <th>id</th>
-                <th>categories_id</th>
-                <th>name</th>
-                <th>description</th>
-                <th>price</th>
-                <th>stock</th>
-                <th>image_url</th>
-            </tr>
-        </tfoot>
+        </tbody>       
     </table>
 
 </div>

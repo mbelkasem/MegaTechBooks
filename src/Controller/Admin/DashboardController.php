@@ -3,7 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Product;
-use App\Entity\Category;
+use App\Entity\TchatMessage;
 use App\Entity\Comment;
 use App\Entity\User;
 use App\Entity\Post;
@@ -40,11 +40,10 @@ class DashboardController extends AbstractDashboardController
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToCrud('Produits', 'fas fa-list', Product::class);
-
         yield MenuItem::linkToCrud('Blog', 'fas fa-list', Post::class);
-
-        yield MenuItem::linkToCrud('Utilisateurs', 'fas fa-list', User::class);
+        //yield MenuItem::linkToCrud('Utilisateurs', 'fas fa-list', User::class);
         yield MenuItem::linkToCrud('Commentaire', 'fas fa-list', Comment::class);
+        yield MenuItem::linkToCrud('Chat', 'fas fa-list', TchatMessage::class);
 
 
     }
